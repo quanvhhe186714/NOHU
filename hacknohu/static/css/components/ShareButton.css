@@ -1,0 +1,201 @@
+.share-buttons-container {
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  z-index: 1000;
+}
+
+.share-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  border: 2px solid #00ff00;
+  border-radius: 50%;
+  background: white;
+  color: #00ff00;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  box-shadow:
+    0 0 10px rgba(0, 255, 0, 0.3),
+    inset 0 0 10px rgba(0, 255, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.share-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.share-button:hover {
+  background: rgba(0, 255, 0, 0.1);
+  box-shadow:
+    0 0 15px #00ff00,
+    inset 0 0 10px rgba(0, 255, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.share-button:hover::before {
+  left: 100%;
+}
+
+.share-icon {
+  width: 45px;
+  height: 45px;
+  flex-shrink: 0;
+}
+
+.share-text {
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-shadow: 0 0 5px #00ff00;
+}
+
+.telegram-share {
+  border-color: #84d6ff;
+  color: #0cadfd;
+  box-shadow:
+    0 0 10px rgba(0, 136, 204, 0.3),
+    inset 0 0 10px rgba(0, 136, 204, 0.1);
+}
+
+.telegram-share:hover {
+  background: rgba(0, 136, 204, 0.1);
+  box-shadow:
+    0 0 15px #0088cc,
+    inset 0 0 10px rgba(0, 136, 204, 0.2);
+}
+
+.zalo-share {
+  border-color: #84d6ff;
+  color: #0cadfd;
+  box-shadow:
+    0 0 10px rgba(0, 104, 255, 0.3),
+    inset 0 0 10px rgba(0, 104, 255, 0.1);
+}
+
+.zalo-share:hover {
+  background: rgba(0, 104, 255, 0.1);
+  box-shadow:
+    0 0 15px #0068ff,
+    inset 0 0 10px rgba(0, 104, 255, 0.2);
+}
+
+.share-button:hover::after {
+  opacity: 1;
+}
+
+@keyframes scan-share {
+  0% {
+    top: 0;
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  100% {
+    top: 100%;
+    opacity: 1;
+  }
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .share-buttons-container {
+    top: 70px;
+    right: 10px;
+    gap: 8px;
+  }
+
+  .share-button {
+    padding: 8px 12px;
+    min-width: 100px;
+  }
+
+  .share-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .share-text {
+    font-size: 0.7rem;
+  }
+
+  /* Ẩn text ở mobile, chỉ hiển thị icon */
+  .share-text {
+    display: none;
+  }
+
+  .share-button {
+    min-width: auto;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    justify-content: center;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .share-buttons-container {
+    top: 75px;
+    right: 5px;
+    gap: 10px;
+  }
+
+  .share-button {
+    padding: 6px 8px;
+    min-width: 80px;
+    gap: 4px;
+  }
+
+  .share-icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .share-text {
+    font-size: 0.6rem;
+  }
+
+  /* Ẩn text ở mobile nhỏ, chỉ hiển thị icon */
+  .share-text {
+    display: none;
+  }
+
+  .share-button {
+    min-width: auto;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    justify-content: center;
+    padding: 6px;
+  }
+}
+
+/* Landscape mobile optimization */
+@media (max-width: 768px) and (orientation: landscape) {
+  .share-buttons-container {
+    top: 50px;
+    right: 8px;
+    gap: 6px;
+  }
+
+  .share-button {
+    padding: 6px 10px;
+    min-width: 90px;
+  }
+}

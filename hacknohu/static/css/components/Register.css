@@ -1,0 +1,356 @@
+/* Reset và base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Courier New', monospace;
+  background: #000;
+  color: #00ff00;
+  overflow: hidden;
+}
+
+/* Container chính */
+.register-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+}
+
+/* Background */
+.register-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.register-background-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.8;
+}
+
+/* Content chính */
+.register-content {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 6rem; /* Tạo khoảng cách cho title */
+}
+
+/* Container cho form và effects */
+.register-form-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  max-width: 1200px;
+  width: 100%;
+}
+
+/* Side effects */
+.register-side-effect {
+  width: 200px;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.register-side-effect-gif {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 
+    0 0 20px #00ff00,
+    inset 0 0 20px rgba(0, 255, 0, 0.3);
+}
+
+/* Form chính */
+.register-form {
+  /* background: rgba(0, 0, 0, 0.8); */
+  border: 2px solid #00ff00;
+  border-radius: 15px;
+  padding: 2.5rem;
+  min-width: 450px;
+  min-height: 400px;
+  box-shadow: 
+    0 0 30px #00ff00,
+    inset 0 0 30px rgba(0, 255, 0, 0.1);
+  /* backdrop-filter: blur(10px); */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.register-greeting {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.register-greeting h2 {
+  font-size: 1.8rem;
+  color: #00ff00;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 10px #00ff00;
+}
+
+.register-greeting p {
+  color: #00cc00;
+  font-size: 1rem;
+}
+
+/* Form elements */
+.register-form-element {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  flex: 1;
+}
+
+.register-input-group {
+  position: relative;
+}
+
+.register-input {
+  width: 100%;
+  padding: 1rem 1rem 1rem 3rem;
+  background: rgba(0, 0, 0, 0.7);
+  border: 2px solid #00ff00;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 1rem;
+  font-family: 'Courier New', monospace;
+  transition: all 0.3s ease;
+}
+
+.register-input:focus {
+  outline: none;
+  border-color: #00ff00;
+  box-shadow: 
+    0 0 15px #00ff00,
+    inset 0 0 10px rgba(0, 255, 0, 0.2);
+  background: rgba(0, 20, 0, 0.8);
+}
+
+.register-input::placeholder {
+  color: #00cc00;
+}
+
+.register-input-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #00ff00;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.register-input-icon svg {
+  filter: drop-shadow(0 0 3px #00ff00);
+}
+
+.register-input:focus + .register-input-icon {
+  color: #00ff00;
+  filter: drop-shadow(0 0 5px #00ff00);
+}
+
+/* Button */
+.register-button {
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, #00ff00, #00cc00);
+  border: none;
+  border-radius: 8px;
+  color: #000;
+  font-size: 1.2rem;
+  font-weight: bold;
+  font-family: 'Courier New', monospace;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 0.5rem;
+}
+
+.register-button:hover {
+  background: linear-gradient(135deg, #00cc00, #00ff00);
+  box-shadow: 
+    0 0 20px #00ff00,
+    0 0 40px #00ff00;
+  transform: translateY(-2px);
+}
+
+.register-button:active {
+  transform: translateY(0);
+}
+
+/* Footer */
+.register-footer {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.register-footer p {
+  color: #00cc00;
+  font-size: 0.9rem;
+}
+
+.login-link {
+  color: #00ff00;
+  text-decoration: none;
+  font-weight: bold;
+  text-shadow: 0 0 5px #00ff00;
+  transition: all 0.3s ease;
+}
+
+.login-link:hover {
+  color: #00ff00;
+  text-shadow: 
+    0 0 10px #00ff00,
+    0 0 20px #00ff00;
+}
+
+/* Error State */
+.register-error {
+  background: rgba(255, 0, 0, 0.2);
+  border: 1px solid #ff0000;
+  color: #ff0000;
+  padding: 0.75rem;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-weight: bold;
+  text-shadow: 0 0 5px #ff0000;
+}
+
+.register-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .register-form-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  /* Ẩn side effects trên mobile */
+  .register-side-effect {
+    display: none;
+  }
+  
+  .register-form {
+    min-width: 320px;
+    min-height: 350px;
+    padding: 2rem;
+  }
+  
+  .register-content {
+    padding-top: 4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .register-form {
+    min-width: 280px;
+    min-height: 320px;
+    padding: 1.5rem;
+  }
+  
+  .register-greeting h2 {
+    font-size: 1.5rem;
+  }
+  
+  .register-greeting p {
+    font-size: 0.9rem;
+  }
+  
+  .register-input {
+    padding: 0.8rem 0.8rem 0.8rem 2.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .register-button {
+    padding: 0.8rem;
+    font-size: 1rem;
+  }
+  
+  .register-footer p {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 768px) and (orientation: landscape) {
+  .register-content {
+    padding-top: 2rem;
+  }
+  
+  .register-form {
+    min-height: 280px;
+    padding: 1.5rem;
+  }
+}
+
+/* Hiệu ứng particle */
+.register-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(0, 255, 0, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(0, 255, 0, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(0, 255, 0, 0.05) 0%, transparent 50%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Scan line effect */
+.register-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #00ff00, transparent);
+  animation: scan 3s linear infinite;
+  z-index: 3;
+  pointer-events: none;
+}
+
+@keyframes scan {
+  0% {
+    top: 0;
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    top: 100%;
+    opacity: 1;
+  }
+} 
