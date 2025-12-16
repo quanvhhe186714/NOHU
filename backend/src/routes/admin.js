@@ -26,10 +26,20 @@ router.get("/users", auth(["admin", "moderator"]), async (req, res) => {
       .skip((page - 1) * limit)
       .limit(limit);
 
+    // Transform _id to id for frontend compatibility
+    const transformedUsers = users.map((user) => ({
+      id: user._id.toString(),
+      username: user.username,
+      phone: user.phone,
+      balance: user.balance,
+      role: user.role,
+      createdAt: user.createdAt,
+    }));
+
     return res.json({
       success: true,
       data: {
-        users,
+        users: transformedUsers,
         pagination: {
           total,
           page,

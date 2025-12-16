@@ -7,8 +7,6 @@ import {
   UsersIcon,
   XIcon,
   CheckIcon,
-  AlertCircleIcon,
-  InfoIcon,
   ArrowLeftIcon,
   DownloadIcon,
 } from "./icons";
@@ -16,6 +14,7 @@ import * as XLSX from "xlsx";
 import Header from "./Header";
 import "../../css/components/AdminDashboard.css";
 import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface User {
   id: number;
