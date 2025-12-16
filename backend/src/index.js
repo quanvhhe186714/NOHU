@@ -11,7 +11,33 @@ dotenv.config();
 
 const app = express();
 
-app.use(cors());
+// CORS configuration - cho phép cả local và production
+const corsOptions = {
+  origin: function (origin, callback) {
+    // Cho phép requests không có origin (mobile apps, Postman, etc.)
+    if (!origin) return callback(null, true);
+    
+    // Danh sách các origin được phép
+    const allowedOrigins = [
+      'http://localhost:3000',
+      'http://localhost:5173',
+      'http://127.0.0.1:3000',
+      process.env.FRONTEND_URL,
+    ].filter(Boolean); // Loại bỏ undefined/null
+    
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      // Trong production, có thể cho phép tất cả hoặc chỉ định domain cụ thể
+      // Để bảo mật hơn, uncomment dòng dưới và comment dòng callback(null, true)
+      // callback(new Error('Not allowed by CORS'));
+      callback(null, true); // Tạm thời cho phép tất cả để dễ deploy
+    }
+  },
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 app.get("/", (_req, res) => {
