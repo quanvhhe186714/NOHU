@@ -1,0 +1,24 @@
+# Render Configuration File
+# File này giúp Render tự động cấu hình backend service
+
+services:
+  - type: web
+    name: hacknohu-backend
+    env: node
+    region: singapore  # hoặc oregon
+    plan: free  # hoặc starter, standard, pro
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && npm start
+    rootDir: backend
+    envVars:
+      - key: PORT
+        value: 9999
+      - key: NODE_ENV
+        value: production
+      - key: MONGO_URI
+        sync: false  # Phải set thủ công trong Render dashboard
+      - key: JWT_SECRET
+        sync: false  # Phải set thủ công trong Render dashboard
+    healthCheckPath: /
+    autoDeploy: true
+
