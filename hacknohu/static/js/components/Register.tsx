@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import './Register.css';
+import type { FormEvent } from 'react';
+import '../../css/components/Register.css';
 import { UserIcon, LockIcon, PhoneIcon, ShieldIcon } from './icons';
 import { authApi } from '../services/api';
 
@@ -12,7 +13,7 @@ const isValidVietnamesePhone = (phone: string): boolean => {
   return /^(0|\+84)(3[2-9]|5[2689]|7[06-9]|8[1-689]|9[0-46-9])[0-9]{7}$/.test(phone);
 };
 
-const Register: React.FC<RegisterProps> = ({ onSwitchToLogin, onRegisterSuccess }) => {
+const Register = ({ onSwitchToLogin, onRegisterSuccess }: RegisterProps) => {
   const [username, setUsername] = useState('');
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
@@ -20,7 +21,7 @@ const Register: React.FC<RegisterProps> = ({ onSwitchToLogin, onRegisterSuccess 
   const [error, setError] = useState<string | null>(null);
   const [phoneError, setPhoneError] = useState<string | null>(null);
 
-  const handleRegister = async (e: React.FormEvent) => {
+  const handleRegister = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError(null);

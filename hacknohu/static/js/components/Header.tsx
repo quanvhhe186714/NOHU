@@ -1,13 +1,13 @@
 import React from "react";
 import {
-  FiLogOut,
-  FiArrowLeft,
-  FiStar,
-  FiUser,
-  FiRefreshCw,
-  FiMenu,
-} from "react-icons/fi";
-import "./Header.css";
+  LogOutIcon,
+  ArrowLeftIcon,
+  UserIcon,
+  RefreshIcon,
+  StarIcon,
+  MenuIcon,
+} from "./icons";
+import "../../css/components/Header.css";
 
 interface HeaderProps {
   title: string;
@@ -26,7 +26,7 @@ interface HeaderProps {
   onDashboardClick?: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({
+const Header = ({
   title,
   username,
   role,
@@ -41,7 +41,7 @@ const Header: React.FC<HeaderProps> = ({
   pageType = 'default',
   showDashboardButton = false,
   onDashboardClick,
-}) => {
+}: HeaderProps) => {
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
   const [isMobile, setIsMobile] = React.useState(window.innerWidth < 768);
 
@@ -71,7 +71,7 @@ const Header: React.FC<HeaderProps> = ({
         <div className="header-left">
           {isMobile && username && (
             <button className="header-drawer-button" onClick={toggleDrawer}>
-              <FiMenu size={20} />
+              <MenuIcon size={20} />
             </button>
           )}
           <h1 className="header-title">{title}</h1>
@@ -88,19 +88,19 @@ const Header: React.FC<HeaderProps> = ({
                     onClick={onRefresh}
                     title="Làm mới dữ liệu"
                   >
-                    <FiRefreshCw size={14} />
+                    <RefreshIcon size={14} />
                   </button>
                 </div>
               )}
               {showDashboardButton && onDashboardClick && (
                 <button className="header-dashboard-button" onClick={onDashboardClick}>
-                  <FiArrowLeft size={16} />
+                  <ArrowLeftIcon size={16} />
                   <span>Dashboard</span>
                 </button>
               )}
               {showAdminButton && (role === "admin" || role === "moderator") && onAdminClick && (
                 <button className="header-admin-button" onClick={onAdminClick}>
-                  <FiStar size={16} />
+                  <StarIcon size={16} />
                   <span>Admin</span>
                 </button>
               )}
@@ -108,7 +108,7 @@ const Header: React.FC<HeaderProps> = ({
                 className="header-logout-button"
                 onClick={onLogout || handleLogout}
               >
-                <FiLogOut size={16} />
+                <LogOutIcon size={16} />
                 <span>Đăng xuất</span>
               </button>
             </div>
@@ -125,7 +125,7 @@ const Header: React.FC<HeaderProps> = ({
       {isMobile && showBackButton && onBackClick && (
         <div className="header-back-mobile">
           <button className="header-back-button-mobile" onClick={onBackClick}>
-            <FiArrowLeft size={16} />
+            <ArrowLeftIcon size={16} />
           </button>
         </div>
       )}
@@ -133,7 +133,7 @@ const Header: React.FC<HeaderProps> = ({
       {!isMobile && showBackButton && onBackClick && (
         <div className={`header-back-desktop header-back-${pageType}`}>
           <button className="header-back-button-desktop" onClick={onBackClick}>
-            <FiArrowLeft size={24} />
+            <ArrowLeftIcon size={24} />
           </button>
         </div>
       )}
@@ -151,22 +151,22 @@ const Header: React.FC<HeaderProps> = ({
             <div className="drawer-header">
               <h3>Menu</h3>
               <button className="drawer-close" onClick={closeDrawer}>
-                <FiArrowLeft size={20} />
+                <ArrowLeftIcon size={20} />
               </button>
             </div>
             <div className="drawer-content">
               {username && (
                 <div className="drawer-user-info">
                   <div className="drawer-username">
-                    <FiUser size={16} />
+                    <UserIcon size={16} />
                     <span>{username}</span>
                   </div>
                   {role && (
                     <div className={`drawer-role ${role}`}>
                       {role === "admin" || role === "moderator" ? (
-                        <FiStar size={16} />
+                        <StarIcon size={16} />
                       ) : (
-                        <FiUser size={16} />
+                        <UserIcon size={16} />
                       )}
                       <span>{role.toUpperCase()}</span>
                     </div>
@@ -178,7 +178,7 @@ const Header: React.FC<HeaderProps> = ({
                         className="drawer-refresh-button"
                         onClick={onRefresh}
                       >
-                        <FiRefreshCw size={14} />
+                        <RefreshIcon size={14} />
                       </button>
                     )}
                   </div>
@@ -193,7 +193,7 @@ const Header: React.FC<HeaderProps> = ({
                       closeDrawer();
                     }}
                   >
-                    <FiArrowLeft size={16} />
+                    <ArrowLeftIcon size={16} />
                     <span>Dashboard</span>
                   </button>
                 )}
@@ -205,7 +205,7 @@ const Header: React.FC<HeaderProps> = ({
                       closeDrawer();
                     }}
                   >
-                    <FiStar size={16} />
+                    <StarIcon size={16} />
                     <span>Admin Panel</span>
                   </button>
                 )}
@@ -216,7 +216,7 @@ const Header: React.FC<HeaderProps> = ({
                     closeDrawer();
                   }}
                 >
-                  <FiLogOut size={16} />
+                  <LogOutIcon size={16} />
                   <span>Đăng xuất</span>
                 </button>
               </div>

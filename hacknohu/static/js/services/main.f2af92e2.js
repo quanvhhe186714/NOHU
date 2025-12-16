@@ -35270,7 +35270,7 @@
         i.jsx)("button", {
             className: "share-button telegram-share",
             onClick: () => {
-                window.open("https://t.me/trolyhamy2k", "_blank")
+                window.open("https://t.me/WebbuffMXH", "_blank")
             }
             ,
             title: "Chia s\u1ebb qua Telegram",

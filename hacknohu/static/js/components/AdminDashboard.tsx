@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { adminApi, authApi } from "../services/api";
 import {
-  FiSearch,
-  FiDollarSign,
-  FiLock,
-  FiUsers,
-  FiX,
-  FiCheck,
-  FiAlertCircle,
-  FiInfo,
-  FiArrowLeft,
-  FiDownload,
-} from "react-icons/fi";
+  SearchIcon,
+  DollarSignIcon,
+  LockIcon,
+  UsersIcon,
+  XIcon,
+  CheckIcon,
+  AlertCircleIcon,
+  InfoIcon,
+  ArrowLeftIcon,
+  DownloadIcon,
+} from "./icons";
 import * as XLSX from "xlsx";
 import Header from "./Header";
-import "./AdminDashboard.css";
+import "../../css/components/AdminDashboard.css";
 import { ToastContainer, toast } from 'react-toastify';
 
 interface User {
@@ -241,7 +241,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({
       <div className="admin-content">
         <div className="admin-header">
           <div className="admin-header-icon">
-            <FiUsers size={32} />
+            <UsersIcon size={32} />
           </div>
           <h1>QUẢN LÝ NGƯỜI DÙNG</h1>
         </div>
@@ -257,7 +257,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({
               style={{ opacity: loadingExportExcel ? 0.5 : 1 }}
               title={loadingExportExcel ? "Đang xử lý..." : ""}
             >
-              <FiDownload size={16} />
+              <DownloadIcon size={16} />
               <span>Xuất Excel</span>
               {loadingExportExcel && <span>Đang xử lý...</span>}
             </button>
@@ -273,7 +273,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({
               />
               <button type="submit" className="search-button">
                 {/* @ts-ignore */}
-                <FiSearch size={16} />
+                <SearchIcon size={16} />
                 <span>Tìm kiếm</span>
               </button>
             </form>
@@ -308,7 +308,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({
                     {currentUserRole !== "moderator" && <td>{user.phone}</td>}
                     <td className="balance">
                       {user.balance}
-                      <FiDollarSign size={14} />
+                      <DollarSignIcon size={14} />
                     </td>
                     <td className={`role ${user.role}`}>{user.role}</td>
                     <td>{formatDate(user.createdAt)}</td>
@@ -321,7 +321,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({
                         className="action-button add-balance"
                       >
                         {/* @ts-ignore */}
-                        <FiDollarSign size={14} />
+                        <DollarSignIcon size={14} />
                         <span>Nạp xu</span>
                       </button>
                       <button
@@ -332,7 +332,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({
                         className="action-button update-password"
                       >
                         {/* @ts-ignore */}
-                        <FiLock size={14} />
+                        <LockIcon size={14} />
                         <span>Sửa mật khẩu</span>
                       </button>
                     </td>
@@ -352,7 +352,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({
               className="pagination-button"
             >
               {/* @ts-ignore */}
-              <FiArrowLeft size={14} />
+              <ArrowLeftIcon size={14} />
               <span>Trước</span>
             </button>
             <span className="pagination-info">
@@ -365,7 +365,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({
             >
               <span>Sau</span>
               {/* @ts-ignore */}
-              <FiArrowLeft size={14} style={{ transform: "rotate(180deg)" }} />
+              <ArrowLeftIcon size={14} style={{ transform: "rotate(180deg)" }} />
             </button>
           </div>
         )}
@@ -415,7 +415,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   disabled={!addBalanceAmount}
                 >
                   {/* @ts-ignore */}
-                  <FiCheck size={16} />
+                  <CheckIcon size={16} />
                   <span>Nạp xu</span>
                 </button>
                 <button
@@ -427,7 +427,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   className="modal-button cancel"
                 >
                   {/* @ts-ignore */}
-                  <FiX size={16} />
+                  <XIcon size={16} />
                   <span>Hủy</span>
                 </button>
               </div>
@@ -453,7 +453,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   className="modal-button confirm"
                 >
                   {/* @ts-ignore */}
-                  <FiCheck size={16} />
+                  <CheckIcon size={16} />
                   <span>Cập nhật</span>
                 </button>
                 <button
@@ -465,7 +465,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   className="modal-button cancel"
                 >
                   {/* @ts-ignore */}
-                  <FiX size={16} />
+                  <XIcon size={16} />
                   <span>Hủy</span>
                 </button>
               </div>

@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import './App.css';
-import Login from './components/Login';
-import Register from './components/Register';
-import Dashboard from './components/Dashboard';
-import GameDetail from './components/GameDetail';
-import AdminDashboard from './components/AdminDashboard';
-import Title from './components/Title';
-import ShareButtons from './components/ShareButtons';
+import '../../css/App.css';
+import Login from '../components/Login';
+import Register from '../components/Register';
+import Dashboard from '../components/Dashboard';
+import GameDetail from '../components/GameDetail';
+import AdminDashboard from '../components/AdminDashboard';
+import ShareButtons from '../components/ShareButton';
 
 type AppState = 'login' | 'register' | 'dashboard' | 'gamedetail' | 'admin';
 

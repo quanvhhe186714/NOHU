@@ -1,231 +1,121 @@
-import React from "react";
-import {
-  FiLogOut,
-  FiArrowLeft,
-  FiStar,
-  FiUser,
-  FiRefreshCw,
-  FiMenu,
-} from "react-icons/fi";
-import "./Header.css";
+import React, { useState } from "react";
+import type { FormEvent } from "react";
+import "../../css/components/Login.css";
+import { UserIcon, LockIcon } from "./icons";
+import { authApi } from "../services/api";
 
-interface HeaderProps {
-  title: string;
-  username?: string;
-  role?: string;
-  showBackButton?: boolean;
-  onBackClick?: () => void;
-  showAdminButton?: boolean;
-  onAdminClick?: () => void;
-  onLogout?: () => void;
-  showRefreshButton?: boolean;
-  onRefresh?: () => void;
-  balance?: number;
-  pageType?: 'admin' | 'game-detail' | 'default';
-  showDashboardButton?: boolean;
-  onDashboardClick?: () => void;
+interface LoginProps {
+  onSwitchToRegister?: () => void;
+  onLoginSuccess?: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({
-  title,
-  username,
-  role,
-  showBackButton = false,
-  onBackClick,
-  showAdminButton = false,
-  onAdminClick,
-  onLogout,
-  showRefreshButton = false,
-  onRefresh,
-  balance,
-  pageType = 'default',
-  showDashboardButton = false,
-  onDashboardClick,
-}) => {
-  const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
-  const [isMobile, setIsMobile] = React.useState(window.innerWidth < 768);
+const Login = ({ onSwitchToRegister, onLoginSuccess }: LoginProps) => {
+  const [identifier, setIdentifier] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  React.useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  const handleLogin = async (e: FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    window.location.reload();
-  };
+    try {
+      const response = await authApi.login(identifier, password);
 
-  const toggleDrawer = () => {
-    setIsDrawerOpen(!isDrawerOpen);
-  };
+      if (response.success) {
+        const { token, user } = response.data;
+        localStorage.setItem("token", token);
+        localStorage.setItem("user", JSON.stringify(user));
 
-  const closeDrawer = () => {
-    setIsDrawerOpen(false);
+        if (onLoginSuccess) {
+          onLoginSuccess();
+        }
+      } else {
+        setError(response.message || "Đăng nhập thất bại");
+      }
+    } catch (err: any) {
+      console.error("Login error:", err);
+      setError(err.message || "Đăng nhập thất bại");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <>
-      <div className="header">
-        <div className="header-left">
-          {isMobile && username && (
-            <button className="header-drawer-button" onClick={toggleDrawer}>
-              <FiMenu size={20} />
-            </button>
-          )}
-          <h1 className="header-title">{title}</h1>
-        </div>
-        <div className="header-right">
-          {!isMobile && username && (
-            <div className="header-user-info">
-              <span className="header-username">{username}</span>
-              {showRefreshButton && onRefresh && (
-                <div className="header-balance">
-                  <span className="header-balance-amount">{balance} xu</span>
-                  <button
-                    className="header-refresh-button"
-                    onClick={onRefresh}
-                    title="Làm mới dữ liệu"
-                  >
-                    <FiRefreshCw size={14} />
-                  </button>
-                </div>
-              )}
-              {showDashboardButton && onDashboardClick && (
-                <button className="header-dashboard-button" onClick={onDashboardClick}>
-                  <FiArrowLeft size={16} />
-                  <span>Dashboard</span>
-                </button>
-              )}
-              {showAdminButton && (role === "admin" || role === "moderator") && onAdminClick && (
-                <button className="header-admin-button" onClick={onAdminClick}>
-                  <FiStar size={16} />
-                  <span>Admin</span>
-                </button>
-              )}
-              <button
-                className="header-logout-button"
-                onClick={onLogout || handleLogout}
-              >
-                <FiLogOut size={16} />
-                <span>Đăng xuất</span>
-              </button>
-            </div>
-          )}
-          {isMobile && (
-            <div className="header-balance-mobile">
-              <span className="header-balance-amount">{balance} xu</span>
-            </div>
-          )}
-        </div>
+    <div className="login-container">
+      <div className="login-background">
+        <img
+          src="/assets/background.gif"
+          alt="Background"
+          className="login-background-image"
+        />
       </div>
 
-      {/* Back Button for Mobile - Position Absolute */}
-      {isMobile && showBackButton && onBackClick && (
-        <div className="header-back-mobile">
-          <button className="header-back-button-mobile" onClick={onBackClick}>
-            <FiArrowLeft size={16} />
-          </button>
-        </div>
-      )}
-
-      {!isMobile && showBackButton && onBackClick && (
-        <div className={`header-back-desktop header-back-${pageType}`}>
-          <button className="header-back-button-desktop" onClick={onBackClick}>
-            <FiArrowLeft size={24} />
-          </button>
-        </div>
-      )}
-
-      {/* Drawer for Mobile */}
-      {isMobile && (
-        <div
-          className={`drawer-overlay ${isDrawerOpen ? "active" : ""}`}
-          onClick={closeDrawer}
-        >
-          <div
-            className={`drawer ${isDrawerOpen ? "open" : ""}`}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="drawer-header">
-              <h3>Menu</h3>
-              <button className="drawer-close" onClick={closeDrawer}>
-                <FiArrowLeft size={20} />
-              </button>
+      <div className="login-content">
+        <div className="login-form-container">
+          <div className="login-form">
+            <div className="login-greeting">
+              <h2>Chào mừng quay lại</h2>
+              <p>Đăng nhập để tiếp tục</p>
             </div>
-            <div className="drawer-content">
-              {username && (
-                <div className="drawer-user-info">
-                  <div className="drawer-username">
-                    <FiUser size={16} />
-                    <span>{username}</span>
-                  </div>
-                  {role && (
-                    <div className={`drawer-role ${role}`}>
-                      {role === "admin" || role === "moderator" ? (
-                        <FiStar size={16} />
-                      ) : (
-                        <FiUser size={16} />
-                      )}
-                      <span>{role.toUpperCase()}</span>
-                    </div>
-                  )}
-                  <div className="drawer-balance">
-                    <span>Số xu: {balance}</span>
-                    {showRefreshButton && onRefresh && (
-                      <button
-                        className="drawer-refresh-button"
-                        onClick={onRefresh}
-                      >
-                        <FiRefreshCw size={14} />
-                      </button>
-                    )}
-                  </div>
-                </div>
-              )}
-              <div className="drawer-actions">
-                {showDashboardButton && onDashboardClick && (
-                  <button
-                    className="drawer-dashboard-button"
-                    onClick={() => {
-                      onDashboardClick();
-                      closeDrawer();
-                    }}
-                  >
-                    <FiArrowLeft size={16} />
-                    <span>Dashboard</span>
-                  </button>
-                )}
-                {showAdminButton && (role === "admin" || role === "moderator") && onAdminClick && (
-                  <button
-                    className="drawer-admin-button"
-                    onClick={() => {
-                      onAdminClick();
-                      closeDrawer();
-                    }}
-                  >
-                    <FiStar size={16} />
-                    <span>Admin Panel</span>
-                  </button>
-                )}
-                <button
-                  className="drawer-logout-button"
-                  onClick={() => {
-                    (onLogout || handleLogout)();
-                    closeDrawer();
+
+            <form onSubmit={handleLogin} className="login-form-element">
+              <div className="login-input-group">
+                <input
+                  type="text"
+                  value={identifier}
+                  onChange={(e) => setIdentifier(e.target.value)}
+                  placeholder="Tên đăng nhập hoặc số điện thoại"
+                  className="login-input"
+                  required
+                />
+                <span className="login-input-icon">
+                  <UserIcon size={20} />
+                </span>
+              </div>
+
+              <div className="login-input-group">
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Mật khẩu"
+                  className="login-input"
+                  required
+                />
+                <span className="login-input-icon">
+                  <LockIcon size={20} />
+                </span>
+              </div>
+
+              {error && <div className="login-error">{error}</div>}
+
+              <button type="submit" className="login-button" disabled={loading}>
+                {loading ? "Đang đăng nhập..." : "Đăng nhập"}
+              </button>
+            </form>
+
+            <div className="login-footer">
+              <p>
+                Chưa có tài khoản?{" "}
+                <a
+                  href="#"
+                  className="register-link"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (onSwitchToRegister) onSwitchToRegister();
                   }}
                 >
-                  <FiLogOut size={16} />
-                  <span>Đăng xuất</span>
-                </button>
-              </div>
+                  Đăng ký
+                </a>
+              </p>
             </div>
           </div>
         </div>
-      )}
-    </>
+      </div>
+    </div>
   );
 };
 
-export default Header;
+export default Login;

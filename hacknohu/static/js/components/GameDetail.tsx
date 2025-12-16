@@ -1,5 +1,5 @@
 import React from "react";
-import "./GameDetail.css";
+import "../../css/components/GameDetail.css";
 import { authApi } from "../services/api";
 import Header from "./Header";
 import { motion, AnimatePresence } from "framer-motion";
@@ -16,10 +16,12 @@ interface GameDetailProps {
 }
 
 // Popup component
-const InsufficientBalancePopup: React.FC<{
+interface InsufficientBalancePopupProps {
   isVisible: boolean;
   onClose: () => void;
-}> = ({ isVisible, onClose }) => {
+}
+
+function InsufficientBalancePopup({ isVisible, onClose }: InsufficientBalancePopupProps) {
   if (!isVisible) return null;
 
   return (
@@ -51,7 +53,7 @@ function useIsMobile() {
   return isMobile;
 }
 
-const GameDetail: React.FC<GameDetailProps> = ({
+function GameDetail({
   gameName,
   gameLogo,
   gameLobbyLogo,
@@ -60,14 +62,14 @@ const GameDetail: React.FC<GameDetailProps> = ({
   onLogout,
   onPlayGame,
   onAdminClick,
-}) => {
+}: GameDetailProps) {
   const isMobile = useIsMobile();
 
   // State cho loading và số vòng quay
   const [isLoading, setIsLoading] = React.useState(false);
-  const [spinCount, setSpinCount] = React.useState<number | null>(null);
-  const [spinCountAuto, setSpinCountAuto] = React.useState<number | null>(null);
-  const [time, setTime] = React.useState<string | null>(null);
+  const [spinCount, setSpinCount] = React.useState(null as number | null);
+  const [spinCountAuto, setSpinCountAuto] = React.useState(null as number | null);
+  const [time, setTime] = React.useState(null as string | null);
   const [progress, setProgress] = React.useState(0);
   const [showInsufficientPopup, setShowInsufficientPopup] =
     React.useState(false);
@@ -83,9 +85,9 @@ const GameDetail: React.FC<GameDetailProps> = ({
   // Animation states
   const [isButtonAnimating, setIsButtonAnimating] = React.useState(false);
   const [showParticles, setShowParticles] = React.useState(false);
-  const [particles, setParticles] = React.useState<
-    Array<{ id: number; x: number; y: number; delay: number }>
-  >([]);
+  const [particles, setParticles] = React.useState(
+    [] as Array<{ id: number; x: number; y: number; delay: number }>
+  );
 
   const [username, setUsername] = React.useState(() => {
     const userData = localStorage.getItem("user");
@@ -299,7 +301,7 @@ const GameDetail: React.FC<GameDetailProps> = ({
       <div className="game-detail-background">
         {!isMobile && (
           <img
-            src="/assets/background.gif"
+            src="https://hacknohu79.com/assets/background.gif"
             alt="BG Desktop"
             className="game-detail-background-image"
           />
@@ -337,6 +339,11 @@ const GameDetail: React.FC<GameDetailProps> = ({
             </div>
             <div className="game-percent">
               <div className="game-percent-wrapper">
+                <img 
+                  src="https://hacknohu79.com/static/media/percent.fa91ce0f9dbe0e85285c.gif" 
+                  alt="Percent Animation" 
+                  className="game-percent-gif"
+                />
                 <h2>{gamePercent}%</h2>
               </div>
             </div>
@@ -450,6 +457,12 @@ const GameDetail: React.FC<GameDetailProps> = ({
             </div>
             <div className="row-2">
               <div className="row-2-content">
+                <div className="gift-game-desktop">
+                  <img 
+                    src="https://hacknohu79.com/static/media/gif-game-destop.b69af4e253ea0d891da3.gif" 
+                    alt="Gift Game Desktop" 
+                  />
+                </div>
                 <div className="gift-robot">
                   {spinCount === null ? (
                     <img src="/assets/robot.gif" alt="" />
@@ -537,6 +550,11 @@ const GameDetail: React.FC<GameDetailProps> = ({
                 </div>
                 <div className="game-countdown-desktop">
                   <div className="game-percent-desktop">
+                    <img 
+                      src="https://hacknohu79.com/static/media/percent.fa91ce0f9dbe0e85285c.gif" 
+                      alt="Percent Animation" 
+                      className="game-percent-gif"
+                    />
                     <h2>{gamePercent}%</h2>
                   </div>
                 </div>

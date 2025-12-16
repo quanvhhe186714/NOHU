@@ -1,9 +1,9 @@
 import React from "react";
-import "./ShareButtons.css";
+import "../../css/components/ShareButton.css";
 
 const ShareButtons: React.FC = () => {
   const handleTelegramShare = () => {
-    window.open('https://t.me/trolyhamy2k', '_blank');
+    window.open('https://t.me/WebbuffMXH', '_blank');
   };
 
   const handleZaloShare = () => {

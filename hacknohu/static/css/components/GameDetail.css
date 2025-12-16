@@ -25,9 +25,6 @@
 }
 
 /* Header spacing for game detail */
-.game-detail-container {
-  /* padding-top: 60px; */
-}
 
 /* Main Content */
 .game-detail-content {
@@ -351,11 +348,24 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url('/public/assets/gif-game-destop.gif');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   border-radius: 20px;
+}
+
+.gift-game-desktop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.gift-game-desktop img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .row-1 {
@@ -387,13 +397,30 @@
 .game-percent-desktop {
   width: 175px;
   height: 175px;
-  background-image: url('/public/assets/percent.gif');
-  background-size: cover;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 28px;
   font-family: sans-serif;
+  position: relative;
+}
+
+.game-percent-gif {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.game-percent-desktop h2,
+.game-percent-wrapper h2 {
+  position: relative;
+  z-index: 2;
+  color: #00ff00;
+  text-shadow: 0 0 10px #00ff00;
 }
 
 .game-lobby-logo-img {
@@ -630,9 +657,6 @@
     display: none;
   }
 
-  .game-detail-content {
-    /* padding-top: 50px; */
-  }
 
   .game-detail-main-content {
     margin: 0 0.5rem;
@@ -945,13 +969,6 @@
     position: relative;
   }
 
-  .countdown-timer {
-    /* border-radius: 0px !important;
-    border: none !important;
-    background: none !important;
-    box-shadow: none !important;
-    padding: 0px !important; */
-  }
 
   .countdown-time {
     color: #00ff00;
@@ -1034,9 +1051,6 @@
     font-size: 0.6rem;
   }
 
-  .game-detail-content {
-    /* padding-top: 45px; */
-  }
 
   .game-detail-main-content {
     margin: 0 0.3rem;
@@ -2065,6 +2079,17 @@
     inset 0 0 20px rgba(0, 255, 0, 0.1);
   backdrop-filter: blur(10px);
   overflow: hidden;
+}
+
+.game-percent-wrapper .game-percent-gif {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  border-radius: 20px;
 }
 
 .game-percent-wrapper::before {
